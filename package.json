@@ -1,0 +1,15 @@
+{
+  "name": "beta-karttakuva-generic-ol-3067",
+  "dependencies": {
+    "ol": "6.3.1",
+    "ol-mapbox-style": "^6.1.1",
+    "proj4": "^2.6.1"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build --experimental-scope-hoisting --public-url . index.html"
+  }
+}
