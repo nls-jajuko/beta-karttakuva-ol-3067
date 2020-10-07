@@ -16,10 +16,13 @@ proj4.defs("EPSG:3067", "+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 
 register(proj4);
 
 
-let
-  center = [384920, 6671856],
+const
+  styleVer = 'v20',
+  tileVer = 'v20',
+  tileMatrixSet = 'ETRS-TM35FIN',
   epsg = 'EPSG:3067', maxZoom = 14, extent =
     [-548576, 6291456, 1548576, 8388608],
+  center = [384920, 6671856],
   projection = getProjection(epsg),
   resolutions = [8192, 4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5],
   tileGrid = new TileGrid({
@@ -31,8 +34,9 @@ let
 projection.setExtent(extent);
 
 /* API-KEY */
-let apiKey = '7cd2ddae-9f2e-481c-99d0-404e7bc7a0b2',
-  styleUrl = 'https://avoin-karttakuva.maanmittauslaitos.fi/vectortiles/stylejson/v20/generic.json?TileMatrixSet=ETRS-TM35FIN&api-key='+apiKey;
+const apiKey = '7cd2ddae-9f2e-481c-99d0-404e7bc7a0b2',
+  styleUrl = `https://avoin-karttakuva.maanmittauslaitos.fi/vectortiles/stylejson/${styleVer}/generic.json?TileMatrixSet=${tileMatrixSet}&api-key=${apiKey}`,
+  tileUrl = `https://avoin-karttakuva.maanmittauslaitos.fi/vectortiles/taustakartta/wmts/1.0.0/taustakartta/default/${tileVer}/${tileMatrixSet}/{z}/{y}/{x}.pbf?api-key=${apiKey}`;
 
 // Font replacement so we do not need to load web fonts in the worker
 function getFont(font) {
@@ -42,7 +46,7 @@ function getFont(font) {
     .replace('Roboto', 'sans-serif');*/
 }
 
-var map = new Map({
+const map = new Map({
   target: 'map',
   view: new View({
     projection: projection,
@@ -62,7 +66,7 @@ const sources = {
     minZoom: 1,
     maxZoom: maxZoom,
     format: new MVT(),
-    url: 'https://avoin-karttakuva.maanmittauslaitos.fi/vectortiles/taustakartta/wmts/1.0.0/taustakartta/default/v20/ETRS-TM35FIN/{z}/{y}/{x}.pbf?api-key=' + apiKey
+    url: tileUrl
   })
 };
 
