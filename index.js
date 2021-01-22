@@ -59,6 +59,8 @@ const map = new Map({
 });
 map.addControl(new FullScreen());
 
+// override with tileURL
+// styleJSON has tileJSON url which does not work without further dev
 const sources = {
   taustakartta: new VectorTileSource({
     projection: projection,
@@ -72,6 +74,7 @@ const sources = {
 
 fetch(styleUrl).then(data => data.json()).then(styleJson => {
 
+  // this is from offscreen canvas example
   const
     layers = [],
     buckets = [];
