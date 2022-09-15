@@ -9,7 +9,7 @@ import View from 'ol/View';
 import VectorTileLayer from 'ol/layer/VectorTile';
 import VectorTileSource from 'ol/source/VectorTile';
 import MVT from 'ol/format/MVT';
-import styleFunction from 'ol-mapbox-style/dist/stylefunction';
+import styleFunction from 'ol-mapbox-style';
 import Hash from './hash';
 
 proj4.defs("EPSG:4326", "+proj=longlat +datum=WGS84 +no_defs");
